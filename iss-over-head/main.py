@@ -24,6 +24,9 @@ data = response.json()
 iss_latitude = float(data["iss_position"]["latitude"])
 iss_longitude = float(data["iss_position"]["longitude"])
 
+print(iss_latitude)
+print(iss_longitude)
+
 parameters = {
     "lat": MY_LAT,
     "lng": MY_LONG,
@@ -43,10 +46,3 @@ hour = time_now.hour
 if MY_LONG - 5 <= iss_longitude <= MY_LONG + 5 and MY_LAT - 5 <= iss_latitude <= MY_LAT + 5:
     if sunset < hour or hour < sunrise:
         send_email()
-
-# and it is currently dark
-# Then send me an email to tell me to look up.
-# BONUS: run the code every 60 seconds.
-
-
-
