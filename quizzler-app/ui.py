@@ -20,12 +20,12 @@ class QuizGUI:
         self.question_text = self.canvas.create_text(200, 150, text="", font=FONT)
         self.canvas.grid(row=1, column=0, columnspan=2, pady=20)
 
-        self.true_img = PhotoImage(file="images/true.png")
-        self.true_button = Button(image=self.true_img)
+        true_img = PhotoImage(file="images/true.png")
+        self.true_button = Button(image=true_img)
         self.true_button.grid(row=2, column=0)
 
-        self.false_img = PhotoImage(file="images/false.png")
-        self.false_button = Button(image=self.false_img)
+        false_img = PhotoImage(file="images/false.png")
+        self.false_button = Button(image=false_img)
         self.false_button.grid(row=2, column=1)
 
         self.window.mainloop()
