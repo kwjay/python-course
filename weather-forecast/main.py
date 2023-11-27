@@ -10,8 +10,11 @@ response = requests.get("https://api.openweathermap.org/data/2.5/forecast", para
 response.raise_for_status()
 weather_data = response.json()
 print(weather_data)
+will_rain = False
 for timestamp in weather_data["list"][0]["weather"]:
     if timestamp["id"] < 700:
-        print("Bring an umbrella")
-    else:
-        print("No need to worry about getting wet")
+        will_rain = True
+if will_rain:
+    print("It's going to rain. Take an umbrella with you!")
+else:
+    print("No need to worry about getting wet")
