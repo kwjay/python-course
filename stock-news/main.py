@@ -2,28 +2,40 @@ import requests
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-
-## STEP 1: Use https://www.alphavantage.co
-# When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
 STOCK_PARAMS = {
     "function": "TIME_SERIES_DAILY",
     "symbol": STOCK,
     "apikey": "",
 }
+NEWS_PARAMS = {
+    "q": COMPANY_NAME,
+    "pageSize": 3,
+    "apiKey": "",
+}
+NEWS_URL = "https://newsapi.org/v2/everything"
+
+
+def get_news():
+    news_response = requests.get(NEWS_URL, NEWS_PARAMS)
+    news_response.raise_for_status()
+    news_data = news_response.json()
+
+
+
 STOCK_URL = "https://www.alphavantage.co/query"
 stock_response = requests.get(STOCK_URL, STOCK_PARAMS)
+stock_response.raise_for_status()
 stock_data = stock_response.json()
 dates = list(stock_data["Time Series (Daily)"].keys())
 yesterday = dates[0]
 day_before = dates[1]
 yesterday_price = stock_data["Time Series (Daily)"][yesterday]["4. close"]
 day_before_price = stock_data["Time Series (Daily)"][day_before]["4. close"]
-## STEP 2: Use https://newsapi.org
+difference = yesterday_price/day_before_price * 100
+if 95 < difference or difference > 105:
+    get_news()
+# STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
-
-## STEP 3: Use https://www.twilio.com
-# Send a seperate message with the percentage change and each article's title and description to your phone number. 
-
 
 #Optional: Format the SMS message like this: 
 """
