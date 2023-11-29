@@ -19,6 +19,8 @@ def get_news():
     news_response = requests.get(NEWS_URL, NEWS_PARAMS)
     news_response.raise_for_status()
     news_data = news_response.json()
+    for news in news_data["articles"]:
+        print(f"{news["title"]}\n{news["description"]}")
 
 
 
@@ -33,11 +35,9 @@ yesterday_price = stock_data["Time Series (Daily)"][yesterday]["4. close"]
 day_before_price = stock_data["Time Series (Daily)"][day_before]["4. close"]
 difference = yesterday_price/day_before_price * 100
 if 95 < difference or difference > 105:
+    print(f"TSLA: {difference}")
     get_news()
-# STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
 
-#Optional: Format the SMS message like this: 
 """
 TSLA: 🔺2%
 Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
